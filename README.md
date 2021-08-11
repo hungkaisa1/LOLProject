@@ -36,3 +36,6 @@ through the browser, it will return the login page if user is "anonymous", retur
 </p>
 <p> 07-20-2021: - Completed the Forum page, but I still haven't refresh session every time I logout.
 </p>
+
+<p> 08-20-2021: - Added Unit Testing for Create (GET) and Edit (GET), and create 3 mock records by using the in-memory database.
+</p>
