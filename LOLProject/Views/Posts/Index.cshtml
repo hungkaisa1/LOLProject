@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LOLProject.Models.Post>
+
+@{ ViewData["Title"] = "Community Center:: League of Legends";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<p>
+    <a asp-action="Create">Create New Posts</a>
+</p>
+<table class="table sortable table-striped" table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.AccountId)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.PostDate)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Title)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Content)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.AccountId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PostDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Content)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.PostId">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.PostId">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.PostId">Delete</a>
+    </td>
+</tr>}
+    </tbody>
+</table>

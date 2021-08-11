@@ -1,0 +1,87 @@
+﻿@model IEnumerable<LOLProject.Models.Champion>
+
+@{ ViewData["Title"] = "All champions in League of Legends (LoL)"; //Browser tab.
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h1>List of All Champions</h1>
+
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+<h5><a asp-action="Create">Create New Champions</a></h5><br />}
+    <h5><a asp-action="Index">Get all Champions</a></h5>
+</p>
+<form method="get" asp-action="Index">
+    <p>
+        <input type="search" placeholder="Enter Champion Name..." value="@ViewData["ChampionName"]"
+               name="Champsearch" style="width:500px;" />
+        <input type="submit" value="search" class="btn btn-primary" />
+
+    </p>
+</form>
+<table class="table sortable table-striped" table-hover>
+    <thead>
+        <tr>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.ChampionName)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Position)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Role)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Price)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Description)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ChampionName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Position.PositionName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Role.RoleName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @if (item.Image != null)
+        {
+<img src="~/img/champions/@item.Image" alt="Product Image" class="img-thumbnail" /> }
+else
+{
+<img src="~/img/noImage.png" alt="Product Image" class="img-thumbnail" />}
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @if (User.IsInRole("Admin"))
+        {
+<a asp-action="Edit" asp-route-id="@item.ChampionId">Edit</a>} |
+
+        <a asp-action="Details" asp-route-id="@item.ChampionId">Details</a> |
+        @if (User.IsInRole("Admin"))
+        {
+<a asp-action="Delete" asp-route-id="@item.ChampionId">Delete</a>}
+    </td>
+</tr>
+}
+    </tbody>
+</table>
